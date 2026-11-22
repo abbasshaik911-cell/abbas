@@ -1,0 +1,8 @@
+{
+  "name": "abbas",
+  "owner": { "name": "Abbas Shaik" },
+  "metadata": { "description": "Abbas: Indian trading skill (build algo strategies + analyse markets)." },
+  "plugins": [
+    { "name": "abbas", "source": "./", "description": "Build Indian algo trading strategies and analyse NSE/BSE markets.", "version": "1.0.0" }
+  ]
+}

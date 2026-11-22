@@ -1,0 +1,8 @@
+{
+  "name": "abbas",
+  "version": "1.0.0",
+  "description": "Abbas: one Indian-markets trading skill. BUILD production-quality Python algo strategies (Rupeezy/Vortex default) and ANALYSE NSE/BSE stocks, F&O, charges, tax, sizing, regime and portfolios with 22 tested calculators.",
+  "author": { "name": "Abbas Shaik" },
+  "license": "MIT",
+  "keywords": ["india", "nse", "bse", "mcx", "algo-trading", "fno", "backtesting", "rupeezy", "tax", "trading-costs"]
+}
