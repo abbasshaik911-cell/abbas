@@ -1,4 +1,4 @@
-Abbas combines three MIT-licensed projects. All licence notices are reproduced below.
+Abbas combines three open-source projects: RupeezyTech/algo_ai_skill (Apache License 2.0), and Shubhamkumartrichy/claude-trading-skills-india and Jakeschincariol/day-trader-skill (both MIT). All licence texts are reproduced below. Modifications: files were reorganised into one skill (skills/abbas/), sub-skill SKILL.md files renamed GUIDE.md, script paths and test loaders adjusted, and a combined router added at the top of SKILL.md.
 
 ===== RupeezyTech/algo_ai_skill (BUILD mode: SKILL.md BUILD section, references/, scripts/) =====
 Apache License

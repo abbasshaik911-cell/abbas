@@ -32,6 +32,6 @@ python3 -m unittest discover -s tests_us
 
 Built by combining [RupeezyTech/algo_ai_skill](https://github.com/RupeezyTech/algo_ai_skill)
 [Shubhamkumartrichy/claude-trading-skills-india](https://github.com/Shubhamkumartrichy/claude-trading-skills-india)
-and [Jakeschincariol/day-trader-skill](https://github.com/Jakeschincariol/day-trader-skill), all MIT. See LICENSE.
+and [Jakeschincariol/day-trader-skill](https://github.com/Jakeschincariol/day-trader-skill). Rupeezy's part is Apache-2.0; the other two are MIT. Files were reorganised and adapted; see LICENSE.
 
 Not investment advice.
