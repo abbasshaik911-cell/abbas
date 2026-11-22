@@ -1,23 +1,27 @@
 ---
 name: abbas
 description: >
-  Abbas: one Indian-markets trading skill (NSE, BSE, MCX) that does two jobs. (1) BUILD:
+  Abbas: one trading skill with three jobs. (1) BUILD:
   writes production-quality Python algo trading strategies (backtest, paper, live) with
   Rupeezy/Vortex as the default broker, strict risk management and Indian market rules.
   (2) ANALYSE: stock and index analysis, F&O and option chains, exact charges/STT, Indian
   tax, position sizing, stops, screeners, market regime, breadth, FII/DII flows, sector
   rotation, IPOs, portfolio review, backtests and trading discipline, using bundled
-  zero-dependency calculators.
+  zero-dependency calculators. (3) US DAY TRADING: US stocks (NYSE/NASDAQ) chart scanner,
+  news, entry timer, exit planner, 10,000-session time machine, risk and budget manager,
+  paper-first Alpaca/IBKR order tickets, price alerts, SEC earnings analyst, Pelosi tracker.
 
   MANDATORY TRIGGERS: algo trading, trading bot, strategy code, backtest, Rupeezy, Vortex,
   options selling bot, intraday or positional strategy; or any question about an Indian
   stock, index (NIFTY, BANKNIFTY, SENSEX) or F&O contract: "analyze RELIANCE", "should I
-  buy TCS", "my charges", "tax on F&O", "review my holdings", "position size", "expiry".
+  buy TCS", "my charges", "tax on F&O", "review my holdings", "position size", "expiry";
+  or US day trading: "scan for setups", "ORB on TSLA", "when do I get in", "set my stop",
+  "replay this trade", "Alpaca", "paper trade", "Pelosi trades", "AAPL earnings".
 ---
 
-# Abbas — Indian Trading Skill
+# Abbas — Trading Skill
 
-One skill, two modes. Decide the mode first, then follow that mode's instructions.
+One skill, three modes. Decide the mode first, then follow that mode's instructions.
 
 ## Step 0: Pick the mode
 
@@ -25,6 +29,7 @@ One skill, two modes. Decide the mode first, then follow that mode's instruction
 |---|---|---|
 | Code: a strategy, bot, backtest script, live deployment, broker automation | **BUILD** | The "BUILD mode" section below (everything after it). |
 | An answer: analyse a stock/index/F&O, plan a trade, charges, tax, sizing, screens, market view, portfolio review | **ANALYSE** | `analysis/india-market-analyst/GUIDE.md` for broad questions, or the specific guide from the table below for narrow ones. |
+| A **US** stock (NYSE/NASDAQ ticker, USD, Alpaca/IBKR): day-trade scan, entry, exit, replay, risk, order, alerts, earnings, Pelosi | **US DAY TRADING** | The "US DAY TRADING mode" section below. |
 | Both (e.g. "find a setup on NIFTY and automate it") | ANALYSE, then BUILD | Do the analysis, confirm the plan with the user, then build. |
 
 Read a guide only when you need it — don't load all of them.
@@ -78,7 +83,31 @@ expiry dates, sizing, Greeks), run it instead of computing in your head.
 | `trading-discipline` | Rules that protect an Indian trader from themselves: an account-level circuit breaker (daily 2%, weekly 5%, monthly 10% loss limits plus losing-streak cooldowns) read from the trade journal, a pre-trade gate (stop, rupee risk, R:R, written plan, revenge window, regime, F&O ban, ASM/GSM/T2T, results, circuit lock, expiry day, MIS cut-off) that returns PASS / PASS-WITH-WARNINGS / BLOCK before any order ticket, a performance review by setup, weekday, hour, segment and mistake, a weekly digest, and an opt-in decision log. |
 | `trailing-stops` | Trailing-stop plans that lock in profit on NSE/BSE positions: the R-multiple ladder (hold → breakeven at 1R → ATR trail at 2R → structure trail at 3R+), plus ATR, structure, moving-average and chandelier trails, with GTT/SL execution realities for Indian brokers. |
 
-## Shared rules (both modes)
+## US DAY TRADING mode
+
+US-market tools (Yahoo Finance charts, Nasdaq Trader symbol lists, SEC EDGAR, House Clerk).
+Each guide lives at `us/<name>/GUIDE.md` with its script next to it. When a guide says
+`/trader-<x>` (the slash command of the original pack), read `us/trader-<x>/GUIDE.md` and
+follow it. Script paths in the guides already point at `${CLAUDE_SKILL_DIR}/us/<name>/`.
+Typical flow: scanner → news → entry → exit → timemachine → budget → risk → broker.
+Nothing places an order except `trader-broker`, after `trader-risk` passes and the user says yes;
+paper trading is the default. Do not use these tools for Indian stocks — use ANALYSE mode.
+
+| Guide | Use for |
+|---|---|
+| `trader-alerts` | Price Alerts. Rings when a price, a stop or the opening bell hits. |
+| `trader-analyst` | The Earnings Analyst. Reads a company's reported numbers straight from SEC EDGAR (XBRL company facts from its 10-Qs and 10-Ks, plus the latest earnings 8-K and its press release) and sums up what changed: revenue, gross, operating and net margins, net income and diluted EPS, quarter by quarter, each against the same quarter a year earlier, with the trailing twelve months. |
+| `trader-broker` | Order Executor. Sends approved orders to your broker, paper trading by default, never without your yes. |
+| `trader-budget` | Budget Manager. Sizes every position to your budget and your max loss per trade. |
+| `trader-entry` | Entry Timer. Watches a setup bar by bar and tells you the moment to get in. |
+| `trader-exit` | Exit Planner. Sets your stop and your target before you enter, so you know when to get out. |
+| `trader-news` | News Monitor. Tracks breaking news on every stock you watch and flags what moves it: Yahoo Finance headlines per ticker, each company's 8-K filings on SEC EDGAR (earnings, CEO changes, deals, restatements, bankruptcy) and how far each stock is from yesterday's close. |
+| `trader-pelosi` | The Pelosi Tracker. Watches the stock trades members of Congress must disclose under the STOCK Act: reads the House Clerk's public Periodic Transaction Reports (PTRs) as soon as they are posted, alerts once per new filing, and turns each PDF into clean rows (who, owner, stock, ticker, buy or sell, options strike and expiry, trade date, amount range, how many days it took to disclose). |
+| `trader-risk` | Risk Manager. Checks every trade against your limits and stops anything over them, before it can reach the broker. |
+| `trader-scanner` | Chart Scanner. Scans thousands of charts for setups: opening-range breakouts, flags, oversold bounces. |
+| `trader-timemachine` | Time Machine. Replays every possible outcome of a trade before you risk a dollar: 10,000 simulated sessions plus every past time the setup fired. |
+
+## Shared rules (all modes)
 
 - When a BUILD reference and an ANALYSE guide disagree on a number (STT, lot size, expiry
   day, tax rate), prefer the one with the more recent date stated in it, and tell the user
